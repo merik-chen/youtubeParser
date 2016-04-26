@@ -4,7 +4,7 @@ py-simple-youtube-parser
 Simple Youtube video information extractor.
 -------------------------------------------
 
-Requirement:
+Req. Packages:
  
     Scrapy
     Requests
