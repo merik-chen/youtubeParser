@@ -18,7 +18,7 @@ Usage:
 ```python
     >>> import youtubeParser
     
-    >>> yParser = YoutubeParser()
+    >>> yParser = youtubeParser.YoutubeParser()
     
     >>> yParser.youtube_url = 'https://www.youtube.com/watch?v=videoID'
     >>> print(yParser.extract_info())
