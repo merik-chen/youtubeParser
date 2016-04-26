@@ -8,8 +8,7 @@ Requirement:
 
 Usage:
 
-.. code-block:: python
-    
+```python
     >>> import youtubeParser
     
     >>> yParser = YoutubeParser()
@@ -20,7 +19,7 @@ Usage:
     OR simply give the VideoID to extract_info function.
     
     >>> print(yParser.extract_info(VideoID))
-    
+```
 
 
 
