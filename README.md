@@ -7,6 +7,7 @@ Simple Youtube video information extractor.
 Requirement:
  
     Scrapy
+    Requests
 
 Demo:
 
