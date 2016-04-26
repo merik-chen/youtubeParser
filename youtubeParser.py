@@ -2,11 +2,16 @@
 # -*- coding: utf-8 -*-
 
 from urlparse import parse_qs
-from scrapy import Selector
-
-import requests
 import json
 import re
+
+try:
+    from scrapy import Selector
+    import requests
+except ImportError:
+    Selector = None
+    requests = None
+    raise ImportError("It seems you don't have acquired the minimal requirement, I'm using Scrapy and Requests.")
 
 
 class YoutubeParser(object):

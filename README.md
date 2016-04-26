@@ -1,19 +1,18 @@
-py-simple-youtube-parser
-========================
+youtubeParser
+=============
 
-Simple Youtube video information extractor.
--------------------------------------------
+##### Simple extract Youtube video information extractor.
 
-Req. Packages:
+### Req. Packages:
  
     Scrapy
     Requests
 
-Demo:
+### Demo:
 
     python youtubeParser/youtubeParser.py
 
-Usage:
+### Usage:
 
 ```python
     >>> import youtubeParser
@@ -28,7 +27,7 @@ OR simply give the VideoID to extract_info function.
     >>> print(yParser.extract_info(VideoID))
 ```
 
-Response:
+### Response:
 
 ```
 {
