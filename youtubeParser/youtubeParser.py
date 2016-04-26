@@ -22,11 +22,15 @@ class YoutubeParser(object):
 
     @youtube_url.setter
     def youtube_url(self, link):
-        find = re.search(ur'v=(\w+)', link)
+        find = re.search(ur'v=([\w-]+)', link)
         if find:
             self.youtube_id = find.groups()[0]
         else:
-            raise ValueError('It seems not a valid youtube url.')
+            find = re.search(ur'youtu\.be/([\w-]+)', link)
+            if find:
+                self.youtube_id = find.groups()[0]
+            else:
+                raise ValueError('It seems not a valid youtube url.')
 
     def extract_info(self, video_id=None):
 
