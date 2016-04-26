@@ -8,11 +8,6 @@ import requests
 import json
 import re
 
-DEV = True
-
-if DEV:
-    import pprint
-
 
 class YoutubeParser(object):
 
