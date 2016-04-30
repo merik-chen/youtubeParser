@@ -73,8 +73,6 @@ class YoutubeParser(object):
 
                 info = {'status': True}.copy()
 
-                print(data['assets'])
-
                 # print(data['assets'])
 
                 info['title'] = data['args']['title']
