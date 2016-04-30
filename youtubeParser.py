@@ -37,6 +37,9 @@ class YoutubeParser(object):
             else:
                 raise ValueError('It seems not a valid youtube url.')
 
+    def __init__(self):
+        print ("youtubeParse v.0.0.1 early alpha")
+
     def extract_info(self, video_id=None):
 
         video_id = video_id and video_id or self.youtube_id
@@ -65,6 +68,8 @@ class YoutubeParser(object):
                     raise ValueError('No correct data to extract information.')
 
                 info = {}.copy()
+
+                # print(data['assets'])
 
                 info['title'] = data['args']['title']
                 info['author'] = data['args']['author']
