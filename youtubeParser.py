@@ -52,19 +52,25 @@ class YoutubeParser(object):
 
         if r.status_code == 200:
             extract = re.search(self.regX, r.content)
+            selector = Selector(text=r.content)
+
+            adult_content = selector.css('meta[property="og:restrictions:age"]::attr("content")').extract_first()
+            if adult_content:
+                return {'status': True, 'msg': 'Can not parse content /w age restrictions.'}
 
             if extract:
                 try:
                     raw = extract.groups()[0]
                     data = json.loads(raw)
-                    selector = Selector(text=r.content)
 
                 except SyntaxError:
                     raise ValueError('No correct data to extract information.')
                 except TypeError:
                     raise ValueError('No correct data to extract information.')
 
-                info = {}.copy()
+                info = {'status': True}.copy()
+
+                print(data['assets'])
 
                 info['title'] = data['args']['title']
                 info['author'] = data['args']['author']
