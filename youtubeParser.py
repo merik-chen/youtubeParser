@@ -125,8 +125,8 @@ class YoutubeParser(object):
                 info['streams'] = []
                 for stream_map in stream_maps:
                     stream = parse_qs(stream_map)
-                    del(stream['fallback_host'])
-                    del(stream['itag'])
+                    # del(stream['fallback_host'])
+                    # del(stream['itag'])
 
                     stream['type'] = stream['type'][0]
                     stream['url'] = stream['url'][0]
@@ -138,7 +138,7 @@ class YoutubeParser(object):
 
 if '__main__' == __name__:
     yParser = YoutubeParser()
-    yParser.youtube_url = 'https://www.youtube.com/watch?v=UYIAfiVGluk'
+    yParser.youtube_url = 'https://www.youtube.com/watch?v=g2DDtxVZofI'
     result = yParser.extract_info()
     try:
         from pprint import pprint
