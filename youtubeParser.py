@@ -37,6 +37,9 @@ class YoutubeParser(object):
             else:
                 raise ValueError('It seems not a valid youtube url.')
 
+    def __init__(self):
+        print ("youtubeParse v.0.0.1 early alpha")
+
     def extract_info(self, video_id=None):
 
         video_id = video_id and video_id or self.youtube_id
@@ -71,6 +74,8 @@ class YoutubeParser(object):
                 info = {'status': True}.copy()
 
                 print(data['assets'])
+
+                # print(data['assets'])
 
                 info['title'] = data['args']['title']
                 info['author'] = data['args']['author']
@@ -136,6 +141,8 @@ class YoutubeParser(object):
                     info['streams'].append(stream)
 
                 return info
+        else:
+            return r.status_code
 
 if '__main__' == __name__:
     yParser = YoutubeParser()
