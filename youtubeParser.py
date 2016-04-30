@@ -58,7 +58,7 @@ class YoutubeParser(object):
         if r.status_code == 200:
             extract = re.search(self.regX, r.content)
 
-            print extract
+            print r.content
 
             if extract:
                 try:
