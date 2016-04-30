@@ -49,12 +49,16 @@ class YoutubeParser(object):
 
         bash_url = 'https://www.youtube.com/watch?v=%s' % video_id
 
+        print bash_url
+
         r = requests.get(bash_url, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) '
                                                           'AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.1 '
                                                           'Safari/537.36'})
 
         if r.status_code == 200:
             extract = re.search(self.regX, r.content)
+
+            print extract
 
             if extract:
                 try:
