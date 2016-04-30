@@ -135,6 +135,8 @@ class YoutubeParser(object):
                     info['streams'].append(stream)
 
                 return info
+        else:
+            return r.status_code
 
 if '__main__' == __name__:
     yParser = YoutubeParser()
