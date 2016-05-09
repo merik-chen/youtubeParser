@@ -77,10 +77,11 @@ class YoutubeParser(object):
 
                 story_board_base_url = 'https://i.ytimg.com/sb/%s/storyboard3_L1/M0.jpg?sigh=%s'
 
-                sb_search = re.search(self.storyBoardRegX, data['args']['storyboard_spec'])
+                if 'storyboard_spec' in data['args']:
+                    sb_search = re.search(self.storyBoardRegX, data['args']['storyboard_spec'])
 
-                if sb_search:
-                    info['story_board'] = story_board_base_url % (video_id, sb_search.groupdict()['sigh'])
+                    if sb_search:
+                        info['story_board'] = story_board_base_url % (video_id, sb_search.groupdict()['sigh'])
 
                 info['duration'] = selector.css('meta[itemprop="duration"]::attr("content")').extract_first()
 
