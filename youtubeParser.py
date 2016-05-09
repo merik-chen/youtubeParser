@@ -37,6 +37,9 @@ class YoutubeParser(object):
             else:
                 raise ValueError('It seems not a valid youtube url.')
 
+    def __init__(self):
+        print ("youtubeParse v.0.0.1 early alpha")
+
     def extract_info(self, video_id=None):
 
         video_id = video_id and video_id or self.youtube_id
@@ -52,19 +55,25 @@ class YoutubeParser(object):
 
         if r.status_code == 200:
             extract = re.search(self.regX, r.content)
+            selector = Selector(text=r.content)
+
+            adult_content = selector.css('meta[property="og:restrictions:age"]::attr("content")').extract_first()
+            if adult_content:
+                return {'status': True, 'msg': 'Can not parse content /w age restrictions.'}
 
             if extract:
                 try:
                     raw = extract.groups()[0]
                     data = json.loads(raw)
-                    selector = Selector(text=r.content)
 
                 except SyntaxError:
                     raise ValueError('No correct data to extract information.')
                 except TypeError:
                     raise ValueError('No correct data to extract information.')
 
-                info = {}.copy()
+                info = {'status': True}.copy()
+
+                # print(data['assets'])
 
                 info['title'] = data['args']['title']
                 info['author'] = data['args']['author']
@@ -131,6 +140,8 @@ class YoutubeParser(object):
                     info['streams'].append(stream)
 
                 return info
+        else:
+            return r.status_code
 
 if '__main__' == __name__:
     yParser = YoutubeParser()
