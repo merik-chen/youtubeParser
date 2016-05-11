@@ -105,23 +105,30 @@ class YoutubeParser(object):
 
                 info['description'] = ''.join(selector.css('p#eow-description').extract_first())
 
-                info['description'] = info['description'].replace('<p id="eow-description">', '')
-                info['description'] = info['description'].replace('</p>', '')
-
-                info['description'] = re.sub(
-                    ur'data-\w+=[^ >]*',
-                    '', info['description']
+                tmp = re.match(
+                    re.compile(ur'<p[^>]*>(?P<content>.+)(?:</p>)', re.DOTALL),
+                    info['description']
                 )
 
-                info['description'] = re.sub(
-                    ur'class=[^ >]*(?: +")?',
-                    '', info['description']
-                )
+                if tmp:
+                    info['description'] = tmp.groupdict()['content']
 
-                info['description'] = re.sub(
-                    ur'( {2,})',
-                    ' ', info['description']
-                )
+                    info['description'] = re.sub(
+                        ur'data-\w+=[^ >]*',
+                        '', info['description']
+                    )
+
+                    info['description'] = re.sub(
+                        ur'class=[^ >]*(?: +")?',
+                        '', info['description']
+                    )
+
+                    info['description'] = re.sub(
+                        ur'( {2,})',
+                        ' ', info['description']
+                    )
+                else:
+                    info['description'] = u''
 
                 stream_maps = data['args']['url_encoded_fmt_stream_map'].split(',')
 
