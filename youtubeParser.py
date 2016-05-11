@@ -54,12 +54,12 @@ class YoutubeParser(object):
                                                           'Safari/537.36'})
 
         if r.status_code == 200:
-            extract = re.search(self.regX, r.content)
             selector = Selector(text=r.content)
 
-            adult_content = selector.css('meta[property="og:restrictions:age"]::attr("content")').extract_first()
-            if adult_content:
-                return {'status': True, 'msg': 'Can not parse content /w age restrictions.'}
+            if selector.css('meta[property="og:restrictions:age"]::attr("content")').extract_first():
+                return {'status': False, 'msg': 'Can not parse content /w age restrictions.'}
+
+            extract = re.search(self.regX, r.content)
 
             if extract:
                 try:
@@ -72,8 +72,6 @@ class YoutubeParser(object):
                     raise ValueError('No correct data to extract information.')
 
                 info = {'status': True}.copy()
-
-                # print(data['assets'])
 
                 info['title'] = data['args']['title']
                 info['author'] = data['args']['author']
@@ -128,6 +126,7 @@ class YoutubeParser(object):
                 stream_maps = data['args']['url_encoded_fmt_stream_map'].split(',')
 
                 info['streams'] = []
+
                 for stream_map in stream_maps:
                     stream = parse_qs(stream_map)
                     # del(stream['fallback_host'])
